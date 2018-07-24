@@ -9,8 +9,13 @@ import { RecipeService } from './recipe.service';
   providers: [RecipeService]
 })
 export class Recipes implements OnInit {
-  ngOnInit(): void {
-    throw new Error("Method not implemented.");
-  }
+  constructor(private recipeService: RecipeService) {}
+
   selectedRecipe: Recipe;
+
+  ngOnInit(): void {
+    this.recipeService.recipeSelected.subscribe((recipe: Recipe) => {
+      this.selectedRecipe = recipe;
+    });
+  }
 }
